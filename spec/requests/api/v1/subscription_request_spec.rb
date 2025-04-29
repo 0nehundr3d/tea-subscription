@@ -58,5 +58,15 @@ RSpec.describe "subscriptions api", type: :request do
             
             expect(json[:data][:status]).to eq("inactive")
         end
+
+        it "Should only allow status to be active or inactive" do
+            subscription = create(:subscription)
+
+            patch "/api/v1/subscriptions/#{subscription.id}", params: {status: "something"}
+            json = JSON.parse(response.body, symbolize_names: true)
+            
+            expect(response).to have_http_status(400)
+            expect(json[:message]).to eq("Status must be either active or inactive")
+        end
     end
 end

@@ -12,4 +12,15 @@ class Subscription < ApplicationRecord
             tea.price
         end
     end
+
+    def validate_updates(params)
+        if !["active", "inactive"].include?(params[:status])
+            return {
+                status: 400,
+                message: "Status must be either active or inactive"
+            }
+        end
+
+        return {}
+    end
 end
