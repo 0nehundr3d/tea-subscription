@@ -42,10 +42,10 @@ group :development, :test do
   gem "pry"
   gem "rspec-rails"
   gem "shoulda-matchers"
+  gem "factory_bot_rails"
 end
 
 group :test do
   gem "simplecov"
-  gem "factory_bot_rails"
 end
 
