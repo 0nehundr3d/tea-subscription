@@ -13,7 +13,8 @@ class SubscriptionsSerializer
                         price: subscription.price
                     }
                 }
-            end
+            end,
+            count: subscriptions.count
         }
     end
 end
