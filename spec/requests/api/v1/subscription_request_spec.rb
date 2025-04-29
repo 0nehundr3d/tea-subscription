@@ -22,4 +22,30 @@ RSpec.describe "subscriptions api", type: :request do
             expect(json[:data][0][:attributes][:price]).to eq(subs[0].price)
         end
     end
+
+    describe "GET one subscription" do
+        it "Should return detailed information about a subscription" do
+            subscription = create(:subscription)
+            teas = create_list(:tea, 2)
+
+            teas.each do |tea|
+                create(:tea_subscription, tea: tea, subscription: subscription)
+            end
+
+            get "/api/v1/subscriptions/#{subscription.id}"
+            json = JSON.parse(response.body, symbolize_names: true)
+
+            expect(json[:data][:customer_name]).to eq(subscription.customer_name)
+            expect(json[:data][:title]).to eq(subscription.title)
+            expect(json[:data][:status]).to eq(subscription.status)
+            expect(json[:data][:frequency]).to eq(subscription.frequency)
+            expect(json[:data][:price]).to eq(subscription.price)
+            expect(json[:data][:teas].length).to eq(subscription.teas.length)
+            expect(json[:data][:teas][0][:title]).to eq(subscription.teas.first.title)
+            expect(json[:data][:teas][0][:description]).to eq(subscription.teas.first.description)
+            expect(json[:data][:teas][0][:temperature]).to eq(subscription.teas.first.temperature)
+            expect(json[:data][:teas][0][:brew_time]).to eq(subscription.teas.first.brew_time)
+            expect(json[:data][:teas][0][:price]).to eq(subscription.teas.first.price)
+        end
+    end
 end
