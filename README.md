@@ -1,24 +1,52 @@
-# README
+# Tea Subscription - BE
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The backend API for my Tea Subscription application, a sercive for managing a tea subscription service. Built using Ruby on Rails and PostgreSQL, This API supports getting information on subscriptions as well as toggling their activation status.
 
-Things you may want to cover:
+---
 
-* Ruby version
+<details>
+  <summary><strong>Tech Stack</strong></summary>
 
-* System dependencies
+  - **Ruby on Rails** 7+
+  - **PostgreSQL**
+  - **RSpec** for testing
+</details>
 
-* Configuration
+---
 
-* Database creation
+<details>
+  <summary><strong>Setup & Installation</strong></summary>
 
-* Database initialization
+## Setup & Installation
 
-* How to run the test suite
+1. Clone the repository
+`git clone`
 
-* Services (job queues, cache servers, search engines, etc.)
+2. Navigate into the project folder
+`cd tea-subscription`
 
-* Deployment instructions
+3. Install dependencies
+`bundle install`
 
-* ...
+4. Set up the database
+`rails db:create
+rails db:migrate
+rails db:seed`
+
+5. Run the server
+`rails s`
+</details>
+
+---
+
+<details>
+  <summary><strong>API Endpoints</strong></summary>
+
+All endpoints are namespaced under: `/api/v1`
+
+| Method | Endpoint               | Description                                                  |
+|--------|------------------------|--------------------------------------------------------------|
+| GET    | `/subscriptions`       | Returns a list of all subscriptions.                         |
+| GET    | `/subscriptions/:id`   | Returns a specific subscription by ID                        |
+| PATCH   | `/subscriptions/:id`  | allows updating of a subscriptions status                    |
+</details>
