@@ -47,6 +47,15 @@ RSpec.describe "subscriptions api", type: :request do
             expect(json[:data][:teas][0][:brew_time]).to eq(subscription.teas.first.brew_time)
             expect(json[:data][:teas][0][:price]).to eq(subscription.teas.first.price)
         end
+
+        it "Should return a 404 error when trying to reach non existant entry" do
+            get "/api/v1/subscriptions/1"
+            json = JSON.parse(response.body, symbolize_names: true)
+            
+            expect(response).to have_http_status :not_found
+            expect(json[:message]).to eq("Could not find Subscription with id 1")
+            expect(json[:status]).to eq(404)
+        end
     end
 
     describe "PATCH one subcription" do
